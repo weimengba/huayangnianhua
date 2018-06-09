@@ -1,0 +1,13 @@
+<view class="add-contain">
+  <view class="add-area">
+    <text class="h5">开始创作</text>
+    <text class="tit-tip">可添加多张图片哦！</text>
+    <view class="add-pic-area">
+      <view class="add-pic">
+        <view class="add-btn" bindtap="addImage">+</view>
+        <text class="add-tip">添加照片</text>
+      </view>
+    </view>
+  </view>
+  <view class="add-bottom"></view>
+</view>

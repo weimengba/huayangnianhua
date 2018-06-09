@@ -1,0 +1,125 @@
+.container {
+  height: calc(100% - 88px);
+}
+.mycenter-head {
+  padding: 0 20px;
+  height: 96px;
+  background-color: #e02e24;
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 16px;
+}
+
+.right-wrap {
+  line-height: 1;
+  color: #fff;
+}
+
+.nick {
+  font-size: 20px;
+}
+
+.user-id {
+  font-size: 15px;
+  margin-top: 10px;
+  display: block;
+}
+
+.collect {
+  position: absolute;
+  width: 100%;
+  top: 96px;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+.collect-head {
+  display: flex;
+  align-items: center;
+  /* padding: 30px 0 20px; */
+  padding: 22px 15px 0;
+}
+
+.collect-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.collect-title {
+  margin-left: 8px;
+  line-height: 18px;
+  font-size: 18px;
+  color: #333;
+}
+.arrow-icon {
+  position: absolute;
+  right: 14px;
+  width: 14px;
+  height: 17px;
+  motion-rotation: (180deg)
+}
+.allInfo {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  margin-top: 22px;
+  width: 100%;
+  left: 0;
+  top: 90px;
+  bottom: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+.collect-list, .pic-list {
+  position: relative;
+}
+/* .collect-list {
+  overflow: hidden;
+  position: absolute;
+  margin-top: 22px;
+  width: 100%;
+  left: 0;
+  top: 90px;
+  bottom: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
+} */
+
+.collect-item, .my-pic-list {
+  display: flex;
+  align-items: center;
+}
+.my-pic-list {
+  margin-bottom: 10px;
+}
+.collect-item {
+  margin-bottom: 20px;
+}
+
+.collect-item + .collect-item {
+  margin-top: 20px;
+}
+
+/* .pic-list {
+  overflow: hidden;
+  position: absolute;
+  margin-top: 22px;
+  width: 100%;
+  left: 0;
+  top: 90px;
+  bottom: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+} */
+
+.videoAlbum {
+  position: relative;
+  width: 100%;
+  height: auto;
+}

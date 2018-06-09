@@ -1,0 +1,85 @@
+ <view wx:if="{{mytype==2}}" class="container">
+  <scroll-view hidden="{{autoRead}}" class="default-wrap" scroll-y>
+    <text class="title">{{detailData.title}}</text>
+    <block wx:for="{{detailData.data}}" wx:key="item.id">
+      <view class="detail-text__content">
+        <block wx:for="{{item.content}}" wx:for-item="text" wx:key="index">
+          <text class="detail-text">{{text}}</text>
+        </block>
+      </view>
+      <image class="detail-img" mode="widthFix" src="{{item.img}}"></image>
+    </block>
+  </scroll-view>
+  <view hidden="{{!autoRead}}" class="auto-read_wrap">
+    <swiper class="swiper-wrap" vertical="true" current="{{current}}" bindchange="autoRead" autoplay="{{autoplay}}" interval="{{interval}}">
+      <block wx:for="{{detailData.data}}" wx:key="item.id">
+        <swiper-item class="swiper-item">
+          <image class="swiper-img" mode="widthFix" src="{{item.img}}"></image>
+          <view class="swiper-text">
+            <view class="text-wrap">
+              <block wx:for="{{item.content}}" wx:for-item="text" wx:key="index">
+                <text class="text">{{text}}</text>
+              </block>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="read-mode_toggle" bindtap="readModeToggle">
+    <image class="btn-icon" src="{{autoRead ? '../statics/images/read_mode_default.png':'../statics/images/read_mode_auto.png'}}"></image>
+  </view>
+  <view class="btn-group">
+    <button class="btn" open-type="share" hover-class="none">分享</button>
+    <view class="btn" bindtap="collectItem">收藏</view>
+  </view>
+</view> 
+
+<!-- 视频模块 -->
+ <view wx:elif="{{mytype==1}}" class="container con2"  bindtap="hideWords">
+  <view class="bg-image" style="background-image:url({{videoData.background}})">
+      <!-- <image class="bgimg" src="{{videoData.background}}"></image> -->
+
+            <block wx:for="{{videoData.imgs}}" wx:for-item="imgItem">
+                   <!-- <image class="a-image" src="{{imgItem.url}}" mode="widthFix" animation="{{imgItem.animationData}}" style="{{imgItem.place}}"></image>  -->
+                          <image class="a-image" src="{{imgItem}}" mode="widthFix"></image> 
+             </block>
+
+      <block wx:for="{{videoData.imgs}}" wx:for-item="imgItem">
+       <!-- <image class="a-image" src="{{imgItem.url}}" mode="widthFix" animation="{{imgItem.animationData}}" style="{{imgItem.place}}"></image>  -->
+       <image class="a-image" src="{{imgItem}}" mode="widthFix"></image> 
+      </block>
+
+    <text class="tips">{{videoData.description}}</text>
+    <view class="btn-fun">
+      <button class="share" open-type="share">分享</button>
+      <!-- <button bindtap="thumbUp" class="{{videoData.is_praises==1?good:''}}">点赞</button> -->
+      <button wx:if="{{videoData.is_praises==1}}" style="color:white;background:#f40009;" bindtap="thumbUp">点赞</button>
+      <button wx:elif="{{videoData.is_praises!==1}}" bindtap="thumbUp" >点赞</button>
+      <button class="album">制作影集</button>
+    </view>
+  </view>
+  <view class="comment-area">
+
+    <scroll-view class="comment-wrap" scroll-y style="height: 286px;bottom:{{commentsBottom}}px;" bindscroll="scroll" scroll-into-view="{{toView}}" >
+      <view class="common-list" wx:for="{{comments}}"  wx:key="item.id">
+        <view class="avatar">
+          <image wx:if="{{item.headface}}" class="" width="30" height="30" src="{{item.headface}}"></image>
+          <image wx:else="{{item.headface}}" class="" width="30" height="30" src="../statics/images/mycenter_highlight.png"></image>
+        </view>
+        <view class="common-area">
+          <text class="common-name">{{item.nick}}</text>
+          <text class="common-time">{{item.time}}</text>
+          <view class="commen-con">
+            <text>{{item.comment}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="write-words">
+      <image class="write-icon" width="21" height="21" src="../statics/images/write.png"></image>
+      <input class="toComment" bindconfirm="onSubmit" catchtap="showWords" value="{{commInput}}"></input>
+    </view>
+  </view>
+</view> 

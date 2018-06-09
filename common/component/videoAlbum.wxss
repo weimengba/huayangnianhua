@@ -1,0 +1,89 @@
+/* common/component/videoAlbum.wxss */
+/* .my-pic-list .video-img { */
+.video-img {
+  position: relative;
+  background:#d8d8d8;
+  border-radius:13px;
+  width:100%;
+  height:230px;
+  overflow: hidden;
+}
+.bg-img {
+  position: relative; 
+   height: 100%; 
+   width: 100%; 
+  border-radius: 13px;
+}
+.video-img .delete-btn {
+  display:inline-block;
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding:7px 14px;
+  font-size:16px;
+  line-height:16px;
+  border:1px solid #fff;
+  color:#fff;
+  background:transparent;
+  border-radius: 100px;
+}
+.video-img .operation {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* max-height: 167px; */
+}
+.video-img .operation .start-end-btn {
+  position:relative;
+  left:calc(50% - 30px);
+  margin-bottom:10px;
+  width:60px;
+  height:60px;
+  opacity:0.4;
+  border-radius:100%;
+}
+.video-img .operation .start-end-btn .control {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.video-img .describe {
+  position: relative;
+  bottom: 0;
+  padding: 5px 10px 10px;
+  width: 100%;
+  /* height: 92px; */
+  max-height: 92px;
+  background: #333;
+  opacity:0.4;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 0 0 13px 13px;
+}
+.video-img .describe .big-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size:20px;
+  color:#fff;
+  line-height:28px;
+  text-align:left;
+  letter-spacing: 2px;
+}
+
+.video-img .desc-info {
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 5px;
+}
+.video-img .desc-info .text {
+  flex: 1;
+}
+.video-img .desc-info text { 
+  font-size:14px;
+  color:#fff;
+  line-height:14px;
+  text-align:left;
+}

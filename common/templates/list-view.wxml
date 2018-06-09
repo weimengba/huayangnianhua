@@ -1,0 +1,68 @@
+<template name="textItem">
+  <text class="title">{{title}}</text>
+  <text class="date">{{publishTime}}</text>
+</template>
+
+<template name="onePicItem">
+  <view class="item-left">
+    <text class="title">{{title}}</text>
+    <text class="date">{{publishTime}}</text>
+  </view>
+  <image class="thumb" lazy-load src="{{imageurl}}"></image>
+</template>
+
+<template name="threePicItem">
+  <text class="title">{{title}}</text>
+  <view class="images-container">
+    <view class="image-wrap" wx:for="{{imageList}}" wx:for-item="thumb">
+      <image class="thumb" lazy-load src="{{thumb.url}}"></image>
+    </view>
+  </view>
+  <text class="date">{{publishTime}}</text>
+</template>
+
+<template name="listItem">
+  <image mode="aspectFill" src="{{thumb}}" class="item-img"></image>
+  <view class="title-wrap">
+    <text class="item-title">{{title}}</text>
+  </view>
+</template>
+
+<template name="collectItem">
+  <view class="thumb-wrap" bindtap="viewDetail" data-idx="{{index}}">
+    <image lazy-load mode="aspectFill" class="collect-thumb" src="{{thumb}}"></image>
+  </view>
+  <view class="right-content">
+    <text class="item-title">{{title}}</text>
+    <text class="date">收藏时间：{{time}}</text>
+    <view class="btn-group">
+      <view class="btn" bindtap="deleteItem" data-idx="{{index}}">删除</view>
+      <button class="btn" open-type="share" data-idx="{{index}}">分享</button>
+    </view>
+  </view>
+</template>
+
+<template name="myPicList">
+  <view class="video-img" style="background-image:url('{{backImage}}')" wx:if="{{iconBtn}}">
+    <button class="delete-btn"  bindtap="delVideo" hidden="{{delBtn == false}}">删除</button>
+    <view class="operation">
+      <view class="start-end-btn">
+        <image wx:if="{{iconBtn == 'start'}}" width="60" height="60" lazy-load class="control" src="../../pages/statics/images/start_video@2x.png" bindtap="videoBtn"></image>
+        <image wx:elif="{{iconBtn == 'stop'}}" width="60" height="60" lazy-load class="control" src="../../pages/statics/images/stop_video@2x.png" bindtap="videoBtn"></image>
+      </view>
+      <view class="describe">
+        <text class="big-desc">{{information}}</text>
+        <view class="desc-info">
+          <text>作者：{{author}}</text>
+          <text>播放：{{playCount}}</text>
+          <text>点赞：{{thumbUp}}</text>
+          <text>{{subTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="loading">
+  <view class="loading-msg">{{loadMsg}}</view>
+</template>

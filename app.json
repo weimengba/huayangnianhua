@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/mycenter/mycenter",
+    "pages/detail/detail",
+    "pages/add-album/add-album",
+    "pages/album/album",
+    "pages/playalbum/playalbum"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#101013",
+    "navigationBarTitleText": "花样年华lite",
+    "navigationBarTextStyle":"white"
+  }
+}

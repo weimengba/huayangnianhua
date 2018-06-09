@@ -1,0 +1,65 @@
+.add-contain {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px 10px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.add-area {
+  position: relative;
+  width: 100%;
+  height: 158px;
+}
+.add-area .h5 {
+  display: block;
+  line-height: 30px;
+  letter-spacing: 3px;
+  font-size: 16px;
+  text-align: center;
+}
+.add-area .tit-tip {
+  display: block;
+  line-height: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+.add-pic-area {
+  margin-top: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fbfbfc;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+}
+.add-pic-area .add-pic {
+  display: inline-block;
+  position: relative;
+  width: 56px;
+  font-size: 12px;
+}
+.add-pic-area .add-btn {
+  display: block;
+  margin: 0 auto 8px;
+  width: 50px;
+  height: 50px;
+  line-height: 44px;
+  color: #fff;
+  font-size: 36px;
+  border-radius: 50%;
+  background-color: #f40009;
+}
+.add-pic-area .add-tip {
+  letter-spacing: 2px;
+}
+
+.add-bottom {
+  position: relative;
+  margin-top: 10px;
+  border-top: 1px solid #dce1e7;
+  border-radius: 10px;
+  flex: 1;
+  width: 100%;
+}

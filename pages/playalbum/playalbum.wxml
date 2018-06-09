@@ -1,0 +1,9 @@
+<view class="play-container" style="background-image:url('{{bgImg}}')">
+  <view class="img-contain">
+    <block wx:for="{{backImage}}">
+        <!-- <image class="a-image" src="{{item.url}}" mode="widthFix" animation="{{animationData}}" style="{{item.place}}"></image>   -->
+       <image class="a-image" src="{{item.url}}" mode="widthFix" animation="{{item.animationData}}" style="{{item.place}}"></image> 
+    </block>
+  </view>
+  
+</view>

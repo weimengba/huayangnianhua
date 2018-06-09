@@ -1,0 +1,7 @@
+<template name="toast">
+  <view class="toast-wrap">
+    <image class="toast-icon" src="../statics/images/jinbi2@3x.png"></image>
+    <text class="toast-reward_source">{{rulename}}</text>
+    <text class="toast-gold_num">金币+{{point}}</text>
+  </view>
+</template>

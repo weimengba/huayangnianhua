@@ -1,0 +1,32 @@
+.toast-wrap {
+  width: 180px;
+  height: 112px;
+  background-color: rgba(0, 0, 0, .8);
+  border-radius: 4px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-wrap text {
+  line-height: 1;
+  font-size: 15px;
+}
+
+.toast-icon {
+  width: 40px;
+  height: 26px;
+}
+.toast-reward_source {
+  color: #fff;
+  margin-top: 10px;
+}
+.toast-gold_num {
+  color: #fac416;
+  margin-top: 10px;
+}

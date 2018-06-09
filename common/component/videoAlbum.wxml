@@ -1,0 +1,40 @@
+  <view class="video-img" bindtap="albumDetail" data-id="{{myData.id}}" data-type="{{myData.type}}" wx:if="{{myData}}">
+     <!-- <block wx:for="{{myData.backImage}}"  wx:for-item="item" wx:key="index"> -->
+     <!-- 文章 -->
+    <image wx:if="{{myData.type === 2}}" class="bg-img" src="{{myData.thumb}}"></image>
+    <!-- 视频 -->
+    <image wx:elif="{{myData.type === 1}}" class="bg-img" src="{{myData.background}}"></image>
+    <!-- </block>   -->
+
+    <button class="delete-btn"  catchtap="delVideo" hidden="{{!delBtn}}">删除</button>
+    <view wx:if="{{!onlyImg}}" class="operation">
+      <!-- <view class="start-end-btn" style="margin-bottom:{{delBtn===true?10:102}}px;"> -->
+      <view wx:if="{{myData.type === 1}}" class="start-end-btn" style="margin-bottom:10px">
+        <image width="60" height="60" lazy-load class="control" src="../../pages/statics/images/start_video@2x.png"></image>
+      </view>
+      <view class="describe">
+        <!-- 文章 -->
+        <text wx:if="{{myData.type === 2}}" class="big-desc">{{myData.title}}</text>  
+        <!-- 视频 -->
+        <text wx:elif="{{myData.type === 1}}" class="big-desc">{{myData.description}}</text>
+        <view class="desc-info">
+          <text hidden="{{!myData.name}}" class="text">作者：{{myData.name}}</text>
+          <!-- 文章 -->
+          <text wx:if="{{myData.type === 2}}" class="text">浏览：{{myData.plays}}</text>
+          <!-- 视频 -->
+          <text wx:elif="{{myData.type === 1}}" class="text">播放：{{myData.plays}}</text>
+
+          <!-- 文章 -->
+          <text wx:if="{{myData.type === 2}}" class="text">分享：{{myData.share}}</text>
+          <!-- 视频 -->
+          <text wx:elif="{{myData.type === 1}}" class="text">点赞：{{myData.praises}}</text>
+
+          <!-- <text class="text">点赞：{{myData.praises}}</text> -->
+          <text>{{myData.time}}</text>
+        </view>
+      </view>
+    </view>
+  </view> 
+
+<!-- </template> -->
+

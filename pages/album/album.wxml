@@ -1,0 +1,98 @@
+<import src="../../common/templates/list-view.wxml" />
+<view class="container">
+  <view class="my-pic-list" >
+    <!-- onlyImg表示没有播放箭头，没有下部分提示信息文字 -->
+    <videoAlbum id="videoAlbum" class="videoAlbum" delBtn="{{delBtn}}" index="true" onlyImg="true" myData="{{videoAlbum}}"></videoAlbum>
+  </view>
+  <view class="album">
+      <!-- <text class="title">选择模板</text> -->
+      <block wx:for-items="{{tabsTit}}" wx:key="{{index}}">
+        <text class="title" wx:if="{{activeIndex == index}}">{{item}}</text>
+      </block>
+      <view class="album-con">
+        <view class="album-left">
+          <!-- 编辑模块 -->
+          <view class="tab edit" hidden="{{activeIndex != 0}}">
+            <view class="edits edit-area">
+              <text class="edit-name">制片人：</text>
+              <input class="make-person" type="text" maxlength="6" bindinput="getLenth" />
+              <label class="tip">{{makePersonLen}}/6</label>
+            </view>
+            <label class="hrline"></label>
+            <view class="edits edit-desc" bindtap="picFocus">
+              <text class="edit-name">相册描述：</text>
+              <label class="tip">{{picDiscLen}}/30</label>
+              <textarea class="album-desc" focus="{{picFocus}}" maxlength="30" bindinput	="getPicLenth"></textarea>
+            </view>
+            <view class="btn-area">
+              <button class="publish" bindtap="publish">发布</button>
+            </view>
+          </view>
+          <!-- 选择模板模块 -->
+          <view class="tab template" hidden="{{activeIndex!=1}}">
+            <scroll-view scroll-y class="temp-scroll"> 
+              <view class="temp-contain">
+                <view class="temp-item" wx:for="{{bgTemplate}}" wx:for-index="index" wx:for-item="bgIndex">
+                  <view class="item-img">
+                    <image class="image" src="{{bgIndex.data}}" alt="模板" data-index="{{index}}" bindtap="selectTemp"></image>
+                    <view hidden="{{tempCheck!==index}}" class="radio-icon">
+                      <radio checked="{{tempCheck===index?true:false}}"></radio>
+                    </view>
+                  </view>
+                  <text class="item-name">{{bgIndex.title}}</text>
+                </view>
+              </view>
+            </scroll-view> 
+          </view>
+          <!-- 选择音乐模块 -->
+          <view class="tab music" hidden="{{activeIndex != 2}}">
+            <scroll-view class="music-scroll" scroll-y>
+              <view class="music-item">
+                <view class="music-info">
+                  <text class="music-name">无音乐</text>
+                </view>
+                <view class="music-icon">
+                  <image width="16" height="20" class="no-music" src="../statics/images/nomusic.png"></image>
+                </view>
+              </view>
+              <!-- <radio-group class="radio-group" bindchange="musicradioChange"> -->
+                <!-- <block wx:for="" wx:key="">   -->
+                  <label wx:for="{{allMusic}}" wx:for-index="musicIdx" wx:for-item="musicItem" class="radio music-item">
+                    <view class="music-info">
+                      <text class="music-name">{{musicItem.title}}</text>
+                       <audio src="{{musicItem.data}}" name="{{current.name}}" id="{{musicItem.id}}" action="{{audioAction}}" bindplay="audioPlayed" bindtimeupdate="audioTimeUpdated"></audio> 
+                      <!-- <audio src="{{musicItem.data}}" name="{{current.name}}" id="{{musicItem.id}}" bindplay="audioPlayed" bindtimeupdate="audioTimeUpdated"></audio> -->
+                      <view class="music-message">
+                        <text class="music-author">薛之谦</text>
+                        <text class="music-size">14M</text>
+                      </view>
+                    </view>
+                    <view class="music-icon">
+                      <radio data-index="{{musicIdx}}" catchtap="selectMusic" checked="{{musicCheck===musicIdx?true:false}}"></radio>
+                    </view>
+                  </label>
+                <!-- </block> -->
+              <!-- </radio-group> -->
+            </scroll-view>
+            <view class="music-bar">
+              <view class="music-title">暧昧</view>
+              <view class="music-player">
+                <image class="img-btn" src="../statics/images/{{imgUrl}}" data-audioId="q{{questionObj.id}}" bindtap="musicControl"></image>
+                <slider class="slider" color="#d3d3d3" selected-color="#f40009" block-size="[8,8]" block-color="#fff" bindchange="sliderchange" max="{{barAll}}" min="0" value="{{barNow}}" disabled="{{canSlider}}"></slider>
+                <view class="timer">
+                  <text class="hasTime">{{currentProcess}}</text>/<text>{{totalProcess}}</text>
+                </view>
+                
+              </view>
+            </view> 
+          </view>
+
+        </view>
+        <view class="album-btns">
+          <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+            <button id="{{index}}" class="btn-item {{activeIndex == index ? 'btn-active' : ''}}" bindtap="tabClick" hover-class="none">{{item}}</button>
+          </block>
+        </view>
+      </view>
+    </view>
+</view>

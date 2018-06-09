@@ -1,0 +1,75 @@
+<import src="../../common/templates/list-view.wxml" />
+<import src="../../common/tabbar/tab.wxml" /> 
+<!-- <import src="../../common/component/videoAlbum.wxml" /> -->
+
+<view class="container">
+  <view class="mycenter-head">
+    <view class="avatar">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view class="right-wrap">
+      <view class="nick">
+        <open-data type="userNickName" lang="zh_CN"></open-data>
+      </view>
+      <text class="user-id">id：{{listData.userid}}</text>
+    </view>
+    
+  </view>
+  <view class="collect">
+    <view class="collect-head" bindtap="collectEvt">
+      <image src="../statics/images/8@2x.png" class="collect-icon"></image>
+      <text class="collect-title">我的收藏</text>
+      <image animation="{{animationData}}" src="../statics/images/show.png" class="arrow-icon"></image>
+    </view>
+    <view class="collect-head">
+      <image src="../statics/images/7@2x.png" class="collect-icon"></image>
+      <text class="collect-title">我的相册</text>
+    </view>
+
+    
+
+    <view class="allInfo">
+      <scroll-view class="collect-list" scroll-y wx:if="{{collection}}">
+        <!-- <block wx:for="{{listData.data}}" wx:key="item.id"> -->
+        <block wx:for="{{listDataSC.data}}" wx:key="item.id">
+          <view class="collect-item" >
+            <template is="collectItem" data="{{...item, index}}" />
+          </view>
+        </block>
+      </scroll-view>
+      <!-- 加载我的相册 -->
+      <scroll-view class="pic-list" scroll-y>
+
+        <block wx:for="{{listData}}" wx:key="item.id" >
+        <!-- <view class="my-pic-list" bindtap="viewDetail" data-idx="{{index}}">
+          <videoAlbum id="videoAlbum" class="videoAlbum" delBtn="{{delBtn}}" myData="{{videoInfo}}"></videoAlbum>
+        </view> -->
+        <!-- 视频需要传参 -->
+        <view wx:if="{{item.type == 1}}" class="my-pic-list" bindtap="viewDetail" 
+        data-idx="{{item.id}}" 
+        data-type="{{item.type}}"
+ data-name="{{item.name}}" 
+ data-description="{{item.description}}" 
+ data-background="{{item.background}}" 
+ data-praises="{{item.praises}}" 
+ data-plays="{{item.plays}}" 
+ data-imgs="{{item.imgs}}">
+          <videoAlbum id="{{item.id}}" class="videoAlbum" index="true" delBtn="{{delBtn}}" myData="{{item}}"></videoAlbum>
+        </view>  
+        <!-- 文章不需要传参 -->
+        <view wx:elif="{{item.type == 2}}" class="my-pic-list" bindtap="viewDetail" data-idx="{{item.id}}" data-type="{{item.type}}">
+          <videoAlbum id="{{item.id}}" class="videoAlbum" index="true" delBtn="{{delBtn}}" myData="{{item}}"></videoAlbum>
+        </view>
+      </block>
+
+        <!-- <block wx:for="{{listData.data}}" wx:key="">
+          <view class="my-pic-list">
+            <videoAlbum id="videoAlbum" class="videoAlbum" delBtn="{{delBtn}}" myData="{{videoInfo}}"></videoAlbum>
+          </view>
+        </block> -->
+      </scroll-view>
+    </view>
+
+  </view>
+</view>
+<template is="tabbar" data="{{tabbar}}" />

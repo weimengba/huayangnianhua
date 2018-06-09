@@ -1,0 +1,49 @@
+<import src="../../common/templates/list-view.wxml" />
+<import src="../../common/tabbar/tab.wxml" />
+<view class="container">
+  <scroll-view class="tab-content__inner" scroll-y bindscrolltolower="loadMore" scroll-top="{{scrollTop}}">
+    <view class="list-container">
+      <!-- <block wx:for="{{listData}}" wx:key="item.id">
+        <view class="list-item" bindtap="viewDetail" data-idx="{{index}}">
+          <template is="listItem" data="{{...item}}" />
+        </view>
+      </block> -->
+
+      <block wx:for="{{listData}}" wx:key="item.id" >
+        <!-- <view class="my-pic-list" bindtap="viewDetail" data-idx="{{index}}">
+          <videoAlbum id="videoAlbum" class="videoAlbum" delBtn="{{delBtn}}" myData="{{videoInfo}}"></videoAlbum>
+        </view> -->
+        <!-- 视频需要传参 -->
+        <view wx:if="{{item.type == 1}}" class="my-pic-list" bindtap="viewDetail" 
+        data-idx="{{item.id}}" 
+        data-type="{{item.type}}"
+ data-name="{{item.name}}" 
+ data-description="{{item.description}}" 
+ data-background="{{item.background}}" 
+ data-praises="{{item.praises}}" 
+ data-plays="{{item.plays}}" 
+ data-imgs="{{item.imgs}}"
+ data-is_praises="{{item.is_praises}}">
+          <videoAlbum id="{{item.id}}" class="videoAlbum" index="true" delBtn="{{delBtn}}" myData="{{item}}"></videoAlbum>
+        </view>  
+        <!-- 文章不需要传参 -->
+        <view wx:elif="{{item.type == 2}}" class="my-pic-list" bindtap="viewDetail" data-idx="{{item.id}}" data-type="{{item.type}}">
+          <videoAlbum id="{{item.id}}" class="videoAlbum" index="true" delBtn="{{delBtn}}" myData="{{item}}"></videoAlbum>
+        </view>
+      </block>
+
+      <!-- <scroll-view class="pic-list" scroll-y>
+        <block wx:for="{{listData.data}}" wx:key="">
+          <view class="my-pic-list">
+            <videoAlbum id="videoAlbum" class="videoAlbum" delBtn="{{delBtn}}" myData="{{videoInfo}}"></videoAlbum>
+          </view>
+        </block>
+      </scroll-view> -->
+
+    </view>
+    <view class="refresh-btn" bindtap="refreshData">
+      <image src="../statics/images/refresh_icon.png" class="refresh-icon {{refresh ? 'refresh-rotate' : ''}}"></image>
+    </view>
+  </scroll-view>
+</view>
+<template is="tabbar" data="{{tabbar}}" />
