@@ -38,10 +38,11 @@ Page({
       const plays = e.currentTarget.dataset.plays
       const imgs = e.currentTarget.dataset.imgs
       const is_praises = e.currentTarget.dataset.is_praises
+      const music = e.currentTarget.dataset.music
       wx.navigateTo({
         // url: `../detail/detail?id=${e.currentTarget.dataset.idx}&type=${e.currentTarget.dataset.type}`
-        url: `../detail/detail?id=${idx}&type=1&name=${name}&description=${description}&background=${background}&praises=${praises}&plays=${plays}&imgs=${imgs}&is_praises=${is_praises}`
-        // url: `../detail/detail?id=${idx}&type=1&names=${name}&descriptions=${description}`
+        url: `../detail/detail?id=${idx}&type=1&name=${name}&description=${description}&background=${background}&praises=${praises}&plays=${plays}&imgs=${imgs}&is_praises=${is_praises}&music=${music}`
+        // url: '../playalbum/playalbum'
       })
     }else {
       wx.navigateTo({

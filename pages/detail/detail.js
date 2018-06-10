@@ -1,7 +1,19 @@
 const util = require('../../utils/util')
 const app = getApp()
 var i = 0
-var formatDH = [];
+var myimgs = ''
+var baseStyle = [
+  { animationData: '', place: 'width:100px;height:auto;opacity:0.5' },
+  { animationData: '', place: 'width:100px;height:auto;opacity:1;top:-100px;' },
+  { animationData: '', place: 'width:100px;height:auto;opacity:1;right:-500px' },
+  { animationData: {}, place: 'width:300px;height:auto;opacity:0;' },
+  { animationData: {}, place: 'width:50px;height:auto;top: -50px;opacity:0.6;' },
+  { animationData: {}, place: 'width:300px;height:auto;opacity:0;' },
+  // 后三个重复
+  { animationData: '', place: 'width:100px;height:auto;opacity:0.5' },
+  { animationData: '', place: 'width:100px;height:auto;opacity:1;top:-100px;' },
+  { animationData: '', place: 'width:100px;height:auto;opacity:1;right:-500px' }
+]
 Page({
   data: {
     autoRead: false,
@@ -26,20 +38,18 @@ Page({
     },
     comments: [],
     commInput: '', //评论框
-    donghua: [
-
-    ],
-    dhStyle: [
-    { url: '', animationData: '', place: 'width:100px;height:auto;opacity:0.5' },
-    { url: '', animationData: '', place: 'width:100px;height:auto;opacity:1;top:-100px;' },
-    { url: '', animationData: '', place: 'width:100px;height:auto;opacity:1;right:-500px' },
-    // { url: '', animationData: {}, place: 'width:300px;height:auto;opacity:0;' },
-    // { url: '', animationData: {}, place: 'width:50px;height:auto;top: -50px;opacity:0.6;' },
-    // { url: '', animationData: {}, place: 'width:300px;height:auto;opacity:0;' },
-
-    //  { url: '../../pages/statics/images/8@2x.png', opacity: 0, place: 'right:0'},
-    //  { url: '../../pages/statics/images/0.jpg', opacity: 0, place: 'left:0'}
-                 ],
+    dhStyle: '',
+    audioAction: {
+      method: 'pause'
+    },
+    putAmimate: [
+      'width:100px;height:auto;opacity:0;animation:anim1 5s 1;animation-delay: 0',
+      'width:100px;height:auto;opacity:1;top:-100px;animation:anim2 5s 1;animation-delay: 5s',
+      'width:100px;height:auto;opacity:1;right:-500px;animation:anim3 5s 1;animation-delay: 10s'
+      // {place: 'width:100px;height:auto;opacity:0.5;animation:anim1 5s infinite;animation-delay: 0' },
+      // {place: 'width:100px;height:auto;opacity:0.5;animation:anim2 5s infinite;animation-delay: 5s' },
+      // {place: 'width:100px;height:auto;opacity:0.5;animation:anim3 5s infinite;animation-delay: 10s' },
+    ]
   },
   onLoad(query) {
     wx.showLoading({
@@ -49,7 +59,8 @@ Page({
     console.log(query.id+' 详情了：'+JSON.stringify(query))
 
     if(query.type==1) {//视频数据整理
-      var myimgs = query.imgs.split(',')
+      // var myimgs = query.imgs.split(',')
+      myimgs = query.imgs.split(',')
       this.setData({
         mytype: query.type,
         id: query.id,
@@ -62,26 +73,12 @@ Page({
           praises: query.praises,
           plays: query.plays,
           imgs: myimgs,
-          is_praises: query.is_praises
-        }
+          is_praises: query.is_praises,
+          music: query.music
+        },
+        dhStyle: baseStyle
       })
-      console.log('数据整理后：' + JSON.stringify(this.data.videoData))
-
-      // var formatDH = [];
-      let that = this;
-      for (var j = 0; j < myimgs.length;j++) {
-        // console.log('位置：' + that.dhStyle[j].place)
-        formatDH.push({
-          url: myimgs[j],
-          place: that.data.dhStyle[j].place,
-          animationData: []
-        })
-      }
-      console.log('动画格式：' + JSON.stringify(formatDH))
-      this.setData({
-        donghua: formatDH
-      })
-
+      console.log('所有数据：' + JSON.stringify(this.data.videoData))
       wx.hideLoading()
     }else {
       this.setData({
@@ -96,62 +93,114 @@ Page({
   },
   onShow() {
     this.playCounts()
-    this.collectEvt()
-    // console.log('形成动画：' + JSON.stringify(this.data.donghua))
-    // this.setData({
-    //   donghua: formatDH
-    // })
-    // console.log("最终版："+JSON.stringify(this.data.donghua))
+    this.animations()
+    this.playAudio()
+  },
+  /**
+   * 音乐播放模块
+   */
+  musicControl: function () {
+    console.log('按钮名称：' + this.data.audioAction.method)
+    if (this.data.audioAction.method !== 'play') {//要暂停
+      console.log('要暂停了')
+      this.pauseAudio()
+    }else {//要播放
+    console.log('要播放')
+      this.playAudio()
+    }
+    this.playAudio()
+  },
+  playAudio: function () {
+    this.setData({
+      audioAction: {
+        method: 'play'
+      }
+    });
+    var ythat = this
+    var aa = true;
+    setInterval(function(aa) {
+      console.log('数据开始改变:' + ythat.data.putAmimate)
+      var change = [
+        'width:100px;height:auto;opacity:0;animation:anim11 5s 1;animation-delay: 0',
+        'width:100px;height:auto;opacity:1;top:-100px;animation:anim22 5s 1;animation-delay: 5s',
+        'width:100px;height:auto;opacity:1;right:-500px;animation:anim33 5s 1;animation-delay: 10s'
+      ]
+      ythat.setData({
+        putAmimate: change
+      })
+      aa = !aa;
+    },15000)
+  },
+  pauseAudio: function () {
+    this.setData({
+      audioAction: {
+        method: 'pause'
+      }
+    });
   },
   /**
    * 视频动画
    */
-  collectEvt() {
-    var that1 = this;
-    setTimeout(function () {
+  animations() {
+    console.log('初始i:'+i)
+    let durTime = 5000
+    let timingFun = 'ease-out'
 
-      var animation = wx.createAnimation({
-        duration: 5000,
-        timingFunction: 'ease-out',
+    for(var j=1;j<=9;j++) {
+      var animatName = 'animation' + j
+      var animatN = 'animation'+j
+      animatName = wx.createAnimation({
+        duration: durTime,
+        timingFunction: timingFun
       })
-      // console.log("打印动画效果：" + JSON.stringify(this.data.animationData))
-      this.animation = animation
-      console.log('i: ' + i)
-      if (i === 0) {
-        animation.scale(3).rotate(1080).opacity(1).step({ duration: 1500 }).scale(0.1).opacity(0).step({ delay: 2500, duration: 1000 })
-      } else if (i === 1) {
-        animation.scale(2).top('50%').opacity(1).step({ duration: 1000 }).scale(3).opacity(0).step({ delay: 2000, duration: 1000 })
-      } else if (i === 2) {
-        animation.scale(2).right('38%').skewX(30).opacity(1).step({ duration: 1500 }).scale(0.5).skewX(0).right(600).opacity(0).step({ delay: 2000, duration: 1000 })
-      } else if (i === 3) {
-        animation.opacity(1).step({ duration: 1500 }).width(5).opacity(0).step({ delay: 2000, duration: 1000 })
-      } else if (i === 4) {
-        animation.opacity(0.6).top(160).step({ duration: 450 }).top(10).opacity(0.8).scale(1.8).step({ duration: 600 }).top(260).step({ duration: 650 }).opacity(0.9).top(90).scale(2.6).step({ duration: 600 }).top('38%').step({ duration: 700 }).top('25%').scale(5).step({ duration: 600 }).top('43%').step({ duration: 700 }).opacity(0).step({ duration: 500, delay: 900 })
-      } else if (i === 5) {
-        animation.opacity(1).step({ duration: 1500 }).scale(0.8).opacity(0).step({ delay: 2000, duration: 1500 })
-      }
+      this[animatN] =animatName
+    }
 
-      var animat = 'dhStyle[' + i + '].animationData'
-      console.log('animat:'+animat)
-      // console.log('打印0：' + JSON.stringify(that1.data.donghua))
-      console.log('直接打印：' + JSON.stringify(animation.export()))
-      if(formatDH.length<=i) {
-        formatDH[i].animationData.push(animation.export()) 
+    this.animation1.scale(3).rotate(1080).opacity(1).step({ duration: 1500 }).scale(0.1).opacity(0).step({ delay: 2500, duration: 1000 })
+    this.animation2.scale(2).top('50%').opacity(1).step({ duration: 1000 }).scale(3).opacity(0).step({ delay: 2000, duration: 1000 })
+    this.animation3.scale(2).right('38%').skewX(30).opacity(1).step({ duration: 1500 }).scale(0.5).skewX(0).right(600).opacity(0).step({ delay: 2000, duration: 1000 })
+    this.animation4.opacity(1).step({ duration: 1500 }).width(5).opacity(0).step({ delay: 2000, duration: 1000 })
+    this.animation5.opacity(0.6).top(160).step({ duration: 450 }).top(10).opacity(0.8).scale(1.8).step({ duration: 600 }).top(260)
+    this.animation6.opacity(1).step({ duration: 1500 }).scale(0.8).opacity(0).step({ delay: 2000, duration: 1500 })
+    // 一下为重复123
+    this.animation7.scale(3).rotate(1080).opacity(1).step({ duration: 1500 }).scale(0.1).opacity(0).step({ delay: 2500, duration: 1000 })
+    this.animation8.scale(2).top('50%').opacity(1).step({ duration: 1000 }).scale(3).opacity(0).step({ delay: 2000, duration: 1000 })
+    this.animation9.scale(2).right('38%').skewX(30).opacity(1).step({ duration: 1500 }).scale(0.5).skewX(0).right(600).opacity(0).step({ delay: 2000, duration: 1000 })
+
+    setTimeout(function() {
+      if(i>=9){
+        return
       }
+      let aa = 'dhStyle[' + i + '].animationData'
+      let bb = 'animation' + (i+1);
       this.setData({
-        [animat]: animation.export()
+        [aa]: this[bb]
       })
-      // console.log('打印：' + JSON.stringify(that1.data.donghua['+i+']))
-      i++;
-    }.bind(this), 100)
-
-    // if (i < 9) {
-    // if(i<3) {
-    //   setTimeout(function () {
-    //     that1.collectEvt()
-    //   }.bind(this), 5000)
-    // }
-    console.log("最终版：" + JSON.stringify(formatDH))
+      i++
+    }.bind(this),100)
+    console.log('总长度' + this.data.videoData.imgs.length)
+    if (i < this.data.videoData.imgs.length - 1) {
+      setTimeout(function () {
+        this.animations()
+      }.bind(this), 5000)
+    }else{
+      // console.log('结束')
+      // var videoD = 'videoData.imgs'
+      // // this.setData({
+      // //   [videoD]: '',
+      // //   dhStyle: ''
+      // // })
+      // console.log('结束后：'+this.data.dhStyle)
+      // var thats = this
+      // setInterval(function() {
+      //   thats.setData({
+      //     [videoD]: myimgs,
+      //     dhStyle: baseStyle
+      //   })
+      // },5000)
+      // i = 0
+      // this.animations()
+    }
   },
   /**
    * 视频点赞

@@ -23,7 +23,8 @@
  data-praises="{{item.praises}}" 
  data-plays="{{item.plays}}" 
  data-imgs="{{item.imgs}}"
- data-is_praises="{{item.is_praises}}">
+ data-is_praises="{{item.is_praises}}"
+ data-music="{{item.music}}">
           <videoAlbum id="{{item.id}}" class="videoAlbum" index="true" delBtn="{{delBtn}}" myData="{{item}}"></videoAlbum>
         </view>  
         <!-- 文章不需要传参 -->

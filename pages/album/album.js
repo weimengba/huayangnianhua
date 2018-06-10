@@ -140,13 +140,13 @@ Page({
    * audioPlay：音乐播放
    */
   selectMusic: function(event) {
-    console.log('xuhao: ' + JSON.stringify(event))
+    // console.log('xuhao: ' + JSON.stringify(event))
     this.setData({
       musicCheck: event.target.dataset.index,
       onmusic: this.data.allMusic[event.target.dataset.index].data
     })
     if (this.data.imgUrl == 'music_stop.png') {//正在播放音乐
-      console.log('要更换播放的音乐是：' + JSON.stringify(this.data.allMusic[this.data.musicCheck]))
+      // console.log('要更换播放的音乐是：' + JSON.stringify(this.data.allMusic[this.data.musicCheck]))
       this.data.audioCtx.pause();
       this.setData({
         audioCtx: ''
@@ -199,13 +199,7 @@ Page({
   playAudio: function () {
     console.log('开始播放l:' + JSON.stringify(this.data.audioCtx))
     this.data.audioCtx.play();
-    
-    // this.setData({
-    //   audioAction: {
-    //     method: 'play',
-    //     data: '00:00'
-    //   }
-    // });
+
   },
   pauseAudio: function (e) {
     this.setData({

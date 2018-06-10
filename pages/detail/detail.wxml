@@ -38,18 +38,15 @@
 <!-- 视频模块 -->
  <view wx:elif="{{mytype==1}}" class="container con2"  bindtap="hideWords">
   <view class="bg-image" style="background-image:url({{videoData.background}})">
-      <!-- <image class="bgimg" src="{{videoData.background}}"></image> -->
-
-            <block wx:for="{{videoData.imgs}}" wx:for-item="imgItem">
-                   <!-- <image class="a-image" src="{{imgItem.url}}" mode="widthFix" animation="{{imgItem.animationData}}" style="{{imgItem.place}}"></image>  -->
-                          <image class="a-image" src="{{imgItem}}" mode="widthFix"></image> 
-             </block>
-
-      <block wx:for="{{videoData.imgs}}" wx:for-item="imgItem">
-       <!-- <image class="a-image" src="{{imgItem.url}}" mode="widthFix" animation="{{imgItem.animationData}}" style="{{imgItem.place}}"></image>  -->
-       <image class="a-image" src="{{imgItem}}" mode="widthFix"></image> 
+     <image class="music-btn" hidden="{{audioAction.method=='play'}}" src="../statics/images/start_video@2x.png"    bindtap="playAudio"></image> 
+     <image class="music-btn active" hidden="{{audioAction.method!=='play'}}" src="../statics/images/start_video@2x.png" bindtap="pauseAudio"></image>
+    <audio src="{{videoData.music}}" action="{{audioAction}}" loop='true'></audio>
+    <view class="activeImg">
+      <block wx:for="{{videoData.imgs}}" wx:for-item="imgItem" wx:for-index="index">
+        <!-- <image animation="{{dhStyle[index].animationData}}" class="a-image" src="{{imgItem}}" style="{{dhStyle[index].place}}" mode="widthFix"></image>  -->
+        <image class="a-image" src="{{imgItem}}" style="{{putAmimate[index]}}" mode="widthFix"></image> 
       </block>
-
+    </view>
     <text class="tips">{{videoData.description}}</text>
     <view class="btn-fun">
       <button class="share" open-type="share">分享</button>
